@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import classes from "./Ingredient.css";
 
 class Ingredient extends Component {
-  redner() {
+  render() {
     let ingredient = null;
     switch (this.props.type) {
       case "top-bun":
