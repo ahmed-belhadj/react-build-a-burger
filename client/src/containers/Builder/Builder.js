@@ -23,17 +23,33 @@ class Builder extends Component {
   handleAddIngredient = type => {
     const ingredientTotal = this.state.ingredients[type] + 1;
     const updatedIngredients = { ...this.state.ingredients };
-    const ingredientPrice = INGREDIENT_PRICES[type];
-    const updatedPrice = this.state.price + ingredientPrice;
+    const updatedPrice = this.state.price + INGREDIENT_PRICES[type];
     updatedIngredients[type] = ingredientTotal;
     this.setState({ price: updatedPrice, ingredients: updatedIngredients });
   };
-  handleRemoveIngredient = type => {};
+  handleRemoveIngredient = type => {
+    if (this.state.ingredients[type] === 0) {
+      return;
+    }
+    const ingredientTotal = this.state.ingredients[type] - 1;
+    const updatedIngredients = { ...this.state.ingredients };
+    const updatedPrice = this.state.price - INGREDIENT_PRICES[type];
+    updatedIngredients[type] = ingredientTotal;
+    this.setState({ price: updatedPrice, ingredients: updatedIngredients });
+  };
   render() {
+    const disabledIngredients = { ...this.state.ingredients };
+    for (let key in disabledIngredients) {
+      disabledIngredients[key] = disabledIngredients[key] === 0;
+    }
     return (
       <hoc>
         <Burger ingredients={this.state.ingredients} />
-        <BuildForm addIngredient={this.handleAddIngredient} />
+        <BuildForm
+          addIngredient={this.handleAddIngredient}
+          removeIngredient={this.handleRemoveIngredient}
+          disable={disabledIngredients}
+        />
       </hoc>
     );
   }

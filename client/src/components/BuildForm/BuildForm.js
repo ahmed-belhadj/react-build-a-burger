@@ -17,6 +17,8 @@ const BuildForm = props => {
           key={ingredient.label}
           label={ingredient.label}
           more={() => props.addIngredient(ingredient.type)}
+          less={() => props.removeIngredient(ingredient.type)}
+          disabled={props.disable[ingredient.type]}
         />
       ))}
     </div>
