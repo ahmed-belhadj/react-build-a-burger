@@ -12,6 +12,9 @@ const BuildForm = props => {
   ];
   return (
     <div className={classes.buildForm}>
+      <p>
+        Total: <strong>${props.price.toFixed(2)}</strong>
+      </p>
       {ingredients.map(ingredient => (
         <BuildInput
           key={ingredient.label}

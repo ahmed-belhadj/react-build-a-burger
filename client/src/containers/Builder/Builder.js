@@ -46,6 +46,7 @@ class Builder extends Component {
       <hoc>
         <Burger ingredients={this.state.ingredients} />
         <BuildForm
+          price={this.state.price}
           addIngredient={this.handleAddIngredient}
           removeIngredient={this.handleRemoveIngredient}
           disable={disabledIngredients}
