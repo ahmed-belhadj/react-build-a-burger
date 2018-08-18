@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import hoc from "../../hoc/hoc";
 import Burger from "../../components/Burger/Burger";
+import BuildForm from "../../components/BuildForm/BuildForm";
 
 class Builder extends Component {
   state = {
@@ -16,7 +17,7 @@ class Builder extends Component {
     return (
       <hoc>
         <Burger ingredients={this.state.ingredients} />
-        <div>Controls</div>
+        <BuildForm />
       </hoc>
     );
   }
