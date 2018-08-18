@@ -13,7 +13,11 @@ const BuildForm = props => {
   return (
     <div className={classes.buildForm}>
       {ingredients.map(ingredient => (
-        <BuildInput key={ingredient.label} label={ingredient.label} />
+        <BuildInput
+          key={ingredient.label}
+          label={ingredient.label}
+          more={() => props.addIngredient(ingredient.type)}
+        />
       ))}
     </div>
   );
