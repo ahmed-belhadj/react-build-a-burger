@@ -18,7 +18,8 @@ class Builder extends Component {
       cheese: 0,
       patty: 0
     },
-    price: 4
+    price: 4,
+    purchase: false
   };
   handleAddIngredient = type => {
     const ingredientTotal = this.state.ingredients[type] + 1;
@@ -26,6 +27,7 @@ class Builder extends Component {
     const updatedPrice = this.state.price + INGREDIENT_PRICES[type];
     updatedIngredients[type] = ingredientTotal;
     this.setState({ price: updatedPrice, ingredients: updatedIngredients });
+    this.handleUpdatePurchase(updatedIngredients);
   };
   handleRemoveIngredient = type => {
     if (this.state.ingredients[type] === 0) {
@@ -36,7 +38,18 @@ class Builder extends Component {
     const updatedPrice = this.state.price - INGREDIENT_PRICES[type];
     updatedIngredients[type] = ingredientTotal;
     this.setState({ price: updatedPrice, ingredients: updatedIngredients });
+    this.handleUpdatePurchase(updatedIngredients);
   };
+  handleUpdatePurchase(ingredients) {
+    const sum = Object.keys(ingredients)
+      .map(key => {
+        return ingredients[key];
+      })
+      .reduce((sum, element) => {
+        return sum + element;
+      }, 0);
+    this.setState({ purchase: sum > 0 });
+  }
   render() {
     const disabledIngredients = { ...this.state.ingredients };
     for (let key in disabledIngredients) {
@@ -49,6 +62,7 @@ class Builder extends Component {
           price={this.state.price}
           addIngredient={this.handleAddIngredient}
           removeIngredient={this.handleRemoveIngredient}
+          purchase={this.state.purchase}
           disable={disabledIngredients}
         />
       </hoc>

@@ -24,6 +24,9 @@ const BuildForm = props => {
           disabled={props.disable[ingredient.type]}
         />
       ))}
+      <button className={classes.orderButton} disabled={!props.purchase}>
+        ORDER NOW!
+      </button>
     </div>
   );
 };
