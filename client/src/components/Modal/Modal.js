@@ -3,7 +3,17 @@ import React from "react";
 import classes from "./Modal.css";
 
 const Modal = props => {
-  return <div className={classes.modal}>{props.children}</div>;
+  return (
+    <div
+      className={classes.modal}
+      style={{
+        transform: props.show ? "translateY(0)" : "translateY(-100vh)",
+        opacity: props.show ? "1" : "0"
+      }}
+    >
+      {props.children}
+    </div>
+  );
 };
 
 export default Modal;

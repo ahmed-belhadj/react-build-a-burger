@@ -24,7 +24,11 @@ const BuildForm = props => {
           disabled={props.disable[ingredient.type]}
         />
       ))}
-      <button className={classes.orderButton} disabled={!props.purchase}>
+      <button
+        className={classes.orderButton}
+        disabled={!props.purchase}
+        onClick={props.purchasing}
+      >
         ORDER NOW!
       </button>
     </div>

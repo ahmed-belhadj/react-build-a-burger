@@ -21,7 +21,8 @@ class Builder extends Component {
       patty: 0
     },
     price: 4,
-    purchase: false
+    purchase: false,
+    purchasing: false
   };
   handleAddIngredient = type => {
     const ingredientTotal = this.state.ingredients[type] + 1;
@@ -42,7 +43,7 @@ class Builder extends Component {
     this.setState({ price: updatedPrice, ingredients: updatedIngredients });
     this.handleUpdatePurchase(updatedIngredients);
   };
-  handleUpdatePurchase(ingredients) {
+  handleUpdatePurchase = ingredients => {
     const sum = Object.keys(ingredients)
       .map(key => {
         return ingredients[key];
@@ -51,7 +52,10 @@ class Builder extends Component {
         return sum + element;
       }, 0);
     this.setState({ purchase: sum > 0 });
-  }
+  };
+  handlePurchase = () => {
+    this.setState({ purchasing: true });
+  };
   render() {
     const disabledIngredients = { ...this.state.ingredients };
     for (let key in disabledIngredients) {
@@ -59,7 +63,7 @@ class Builder extends Component {
     }
     return (
       <hoc>
-        <Modal>
+        <Modal show={this.state.purchasing}>
           <OrderSummary ingredients={this.state.ingredients} />
         </Modal>
         <Burger ingredients={this.state.ingredients} />
@@ -68,6 +72,7 @@ class Builder extends Component {
           addIngredient={this.handleAddIngredient}
           removeIngredient={this.handleRemoveIngredient}
           purchase={this.state.purchase}
+          purchasing={this.handlePurchase}
           disable={disabledIngredients}
         />
       </hoc>
