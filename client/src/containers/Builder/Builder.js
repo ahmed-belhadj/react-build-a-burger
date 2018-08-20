@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import hoc from "../../hoc/hoc";
 import Burger from "../../components/Burger/Burger";
 import BuildForm from "../../components/BuildForm/BuildForm";
+import Modal from "../../components/Modal/Modal";
+import OrderSummary from "../../components/OrderSummary/OrderSummary";
 
 const INGREDIENT_PRICES = {
   lettuce: 0.5,
@@ -57,6 +59,9 @@ class Builder extends Component {
     }
     return (
       <hoc>
+        <Modal>
+          <OrderSummary ingredients={this.state.ingredients} />
+        </Modal>
         <Burger ingredients={this.state.ingredients} />
         <BuildForm
           price={this.state.price}
