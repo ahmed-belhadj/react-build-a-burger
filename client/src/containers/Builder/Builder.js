@@ -1,10 +1,13 @@
 import React, { Component } from "react";
+import faker from "faker";
 
 import Wrapper from "../../hoc/Wrapper";
 import Burger from "../../components/Burger/Burger";
 import BuildForm from "../../components/BuildForm/BuildForm";
 import Modal from "../../components/UI/Modal/Modal";
 import OrderSummary from "../../components/OrderSummary/OrderSummary";
+
+import axios from "../../axios-instance";
 
 const INGREDIENT_PRICES = {
   lettuce: 0.5,
@@ -60,7 +63,26 @@ class Builder extends Component {
     this.setState({ purchasing: false });
   };
   handleContinuePurchase = () => {
-    alert("continue");
+    // alert("continue");
+    const order = {
+      customer: {
+        name: faker.name.findName(),
+        address: {
+          street: faker.address.streetAddress(),
+          city: faker.address.city(),
+          state: faker.address.stateAbbr(),
+          country: faker.address.country()
+        },
+        email: faker.internet.exampleEmail()
+      },
+      ingredients: this.state.ingredients,
+      price: this.state.price,
+      orderType: "delivery"
+    };
+    axios
+      .post("/orders.json", order)
+      .then(response => console.info(response))
+      .catch(error => console.error(error));
   };
   render() {
     const disabledIngredients = { ...this.state.ingredients };
