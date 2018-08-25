@@ -6,6 +6,7 @@ import Burger from "../../components/Burger/Burger";
 import BuildForm from "../../components/BuildForm/BuildForm";
 import Modal from "../../components/UI/Modal/Modal";
 import OrderSummary from "../../components/OrderSummary/OrderSummary";
+import Loader from "../../components/UI/Loader/Loader";
 
 import axios from "../../axios-instance";
 
@@ -25,7 +26,8 @@ class Builder extends Component {
     },
     price: 4,
     purchase: false,
-    purchasing: false
+    purchasing: false,
+    loading: false
   };
   handleAddIngredient = type => {
     const ingredientTotal = this.state.ingredients[type] + 1;
@@ -64,6 +66,7 @@ class Builder extends Component {
   };
   handleContinuePurchase = () => {
     // alert("continue");
+    this.setState({ loading: true });
     const order = {
       customer: {
         name: faker.name.findName(),
@@ -81,13 +84,24 @@ class Builder extends Component {
     };
     axios
       .post("/orders.json", order)
-      .then(response => console.info(response))
-      .catch(error => console.error(error));
+      .then(response => this.setState({ loading: false, purchasing: false }))
+      .catch(error => this.setState({ loading: false, purchasing: false }));
   };
   render() {
     const disabledIngredients = { ...this.state.ingredients };
     for (let key in disabledIngredients) {
       disabledIngredients[key] = disabledIngredients[key] === 0;
+    }
+    let orderSummary = (
+      <OrderSummary
+        ingredients={this.state.ingredients}
+        cancelPurchase={this.handleCancelPurchase}
+        continuePurchase={this.handleContinuePurchase}
+        price={this.state.price}
+      />
+    );
+    if (this.state.loading) {
+      orderSummary = <Loader />;
     }
     return (
       <Wrapper>
@@ -95,12 +109,7 @@ class Builder extends Component {
           show={this.state.purchasing}
           closeModal={this.handleCancelPurchase}
         >
-          <OrderSummary
-            ingredients={this.state.ingredients}
-            cancelPurchase={this.handleCancelPurchase}
-            continuePurchase={this.handleContinuePurchase}
-            price={this.state.price}
-          />
+          {orderSummary}
         </Modal>
         <Burger ingredients={this.state.ingredients} />
         <BuildForm
