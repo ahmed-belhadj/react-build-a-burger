@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import faker from "faker";
 
-import Wrapper from "../../hoc/Wrapper";
+import Wrapper from "../../hoc/Wrapper/Wrapper";
 import Burger from "../../components/Burger/Burger";
 import BuildForm from "../../components/BuildForm/BuildForm";
 import Modal from "../../components/UI/Modal/Modal";
 import OrderSummary from "../../components/OrderSummary/OrderSummary";
 import Loader from "../../components/UI/Loader/Loader";
+import withErrorMessage from "../../hoc/withErrorMessage/withErrorMessage";
 
 import axios from "../../axios-instance";
 
@@ -65,7 +66,6 @@ class Builder extends Component {
     this.setState({ purchasing: false });
   };
   handleContinuePurchase = () => {
-    // alert("continue");
     this.setState({ loading: true });
     const order = {
       customer: {
@@ -125,4 +125,4 @@ class Builder extends Component {
   }
 }
 
-export default Builder;
+export default withErrorMessage(Builder, axios);

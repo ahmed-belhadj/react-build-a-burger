@@ -1,6 +1,6 @@
 import React from "react";
 
-import Wrapper from "../../../Wrapper";
+import Wrapper from "../../../Wrapper/Wrapper";
 import Logo from "../../../../components/UI/Logo/Logo";
 import Nav from "../Nav/Nav";
 import Backdrop from "../../../../components/UI/Backdrop/Backdrop";

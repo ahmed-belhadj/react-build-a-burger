@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import Wrapper from "../Wrapper";
+import Wrapper from "../Wrapper/Wrapper";
 import Navbar from "./Navbar/Navbar";
 import VerticalNav from "./Navbar/VerticalNav/VerticalNav";
 
