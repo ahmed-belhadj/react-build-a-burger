@@ -1,9 +1,10 @@
 import React from "react";
 
-import classes from "./Navbar.css";
-import Logo from "../../Logo/Logo";
+import Logo from "../../../components/UI/Logo/Logo";
 import Nav from "./Nav/Nav";
 import Toggle from "./VerticalNav/Toggle/Toggle";
+
+import classes from "./Navbar.css";
 
 const Navbar = props => {
   return (

@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 
-import classes from "./Layout.css";
-import hoc from "../../hoc/hoc";
+import Wrapper from "../Wrapper";
 import Navbar from "./Navbar/Navbar";
 import VerticalNav from "./Navbar/VerticalNav/VerticalNav";
+
+import classes from "./Layout.css";
 
 class Layout extends Component {
   state = {
@@ -19,14 +20,14 @@ class Layout extends Component {
   };
   render() {
     return (
-      <hoc>
+      <Wrapper>
         <Navbar toggleClicked={this.handleToggleVerticalNav} />
         <VerticalNav
           opened={this.state.verticalNavIsOpen}
           closed={this.handleHideVerticalNav}
         />
         <main className={classes.main}>{this.props.children}</main>
-      </hoc>
+      </Wrapper>
     );
   }
 }

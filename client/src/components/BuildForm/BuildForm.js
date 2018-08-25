@@ -1,6 +1,7 @@
 import React from "react";
 
 import BuildInput from "./BuildInput/BuildInput";
+
 import classes from "./BuildForm.css";
 
 const BuildForm = props => {

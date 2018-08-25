@@ -1,10 +1,10 @@
 import React from "react";
 
-import Logo from "../../../Logo/Logo";
+import Wrapper from "../../../Wrapper";
+import Logo from "../../../../components/UI/Logo/Logo";
 import Nav from "../Nav/Nav";
+import Backdrop from "../../../../components/UI/Backdrop/Backdrop";
 import classes from "./VerticalNav.css";
-import Backdrop from "../../../Backdrop/Backdrop";
-import hoc from "../../../../hoc/hoc";
 
 const VerticalNav = props => {
   let verticalNav = [classes.verticalNav, classes.close];
@@ -12,7 +12,7 @@ const VerticalNav = props => {
     verticalNav = [classes.verticalNav, classes.open];
   }
   return (
-    <hoc>
+    <Wrapper>
       <Backdrop show={props.opened} clicked={props.closed} />
       <div className={verticalNav.join(" ")}>
         <div className={classes.logo}>
@@ -22,7 +22,7 @@ const VerticalNav = props => {
           <Nav />
         </nav>
       </div>
-    </hoc>
+    </Wrapper>
   );
 };
 

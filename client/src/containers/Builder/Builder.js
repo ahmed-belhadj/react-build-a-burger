@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
-import hoc from "../../hoc/hoc";
+import Wrapper from "../../hoc/Wrapper";
 import Burger from "../../components/Burger/Burger";
 import BuildForm from "../../components/BuildForm/BuildForm";
-import Modal from "../../components/Modal/Modal";
+import Modal from "../../components/UI/Modal/Modal";
 import OrderSummary from "../../components/OrderSummary/OrderSummary";
 
 const INGREDIENT_PRICES = {
@@ -68,7 +68,7 @@ class Builder extends Component {
       disabledIngredients[key] = disabledIngredients[key] === 0;
     }
     return (
-      <hoc>
+      <Wrapper>
         <Modal
           show={this.state.purchasing}
           closeModal={this.handleCancelPurchase}
@@ -89,7 +89,7 @@ class Builder extends Component {
           purchasing={this.handlePurchase}
           disable={disabledIngredients}
         />
-      </hoc>
+      </Wrapper>
     );
   }
 }
